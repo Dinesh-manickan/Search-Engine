@@ -1,0 +1,51 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+  {% if result is defined and result['error'] is defined %}
+  <div class="list-group" id="search-group">
+    <a
+      href="{{ url_for('index') }}"
+      class="list-group-item list-group-item-action flex-column align-items-start"
+    >
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">No results Found....</h5>
+  
+      </div>
+      <small class="d-flex text-left"
+        >In Corpus. Try with a different query.</small
+      >
+    </a>
+  </div>
+  {% else %}
+ 
+
+  <div class="d-flex justify-content-around">
+
+
+    <div class="container  w-75  m-5">
+      <h5 class="text-center text-decoration display-6">Results</h5>
+      <div class="list-group" id="search-group">
+        {% for i in result['results']['relevent'] %}
+        <a
+          href="{{url_for('getDocument', id=i['document'])}}"
+          class="list-group-item list-group-item-action flex-column align-items-start"
+        >
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ i['document'] }}</h5>
+          </div>
+          <small class="d-flex text-left"
+            >{{url_for('getDocument', id=i['document'])}}</small
+          >
+
+        </a>
+        {% endfor %}
+      </div>
+      <div class="d-flex justify-content-between container m-3 w-10">
+        <span>Precision : {{ result['Precision'] }}</span>
+        <span>Recall : {{ result['Recall'] }}</span>
+        <span>F_Measure : {{ result['F_Measure'] }}</span>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

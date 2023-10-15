@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <table class="styled-table">
+        <tr>
+            <th>Terms</th>
+            <th>Rotated Terms</th>
+        </tr>
+
+        {% for key, values in data.items()|sort   %}
+            <tr class="active-row">
+                <td>{{key}}</td>
+                <td>
+                    <ol>
+                        {% for value in values  %}
+                            <li style="display: inline; margin-right: 10px;">{{ value }}</li>
+                        {% endfor %}
+                    </ol>
+                </td>
+            </tr>
+            {{value}}
+        {% endfor%}
+    </table>
+{% endblock %}

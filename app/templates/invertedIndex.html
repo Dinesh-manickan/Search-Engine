@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <table class="styled-table">
+        <tr>
+            <th>Terms</th>
+            <th>Frequency</th>
+            <th>Postings</th>
+        </tr>
+        {% for term, data in result.items()|sort %}
+            <tr class="active-row">
+                <td>{{ term }}</td>
+                <td>{{ data.freq }}</td>
+                <td>
+                    
+                        {% for posting in data.postings|sort %}
+                            {% set post = posting-1 %}
+                            {{ post }} 
+                        {% endfor %}
+                    
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
