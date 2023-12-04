@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <table class="styled-table">
+        <tr>
+            <th>Soundex Code</th>
+            <th>Term</th>
+        </tr>
+        
+        {% for code, terms in data.items()|sort  %}
+            <tr class="active-row">
+                <td>{{ code }}</td>
+                <td>
+                    <ol>
+                        {% for term in terms %}
+                            <li style="display: inline; margin-right: 10px;">{{ term }}</li>
+                        {% endfor %}
+                    </ol>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endblock %}

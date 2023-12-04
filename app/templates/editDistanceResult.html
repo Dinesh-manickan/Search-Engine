@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Edit Distance Results</h2>
+    <div style="display: grid; grid-auto-flow:column;">
+        <p><strong>Misspelled Word:</strong> {{ result["misspelledWord"] }}</p>
+        <p><strong>Minimum Distance:</strong> {{ result["minDistance"] }}</p>
+    </div>
+   
+    <div align="left" style="margin-left: 20px;">
+        <h3 > {{ result["results"]|length }} Suggestions  Found:</h3>
+        <ul>
+            {% for suggestion in result["results"] %}
+                <li>{{ suggestion["suggestion"]|title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div >
+        <h3>Edit Distance Matrices:</h3>
+        <div >
+        
+        {% for matrix_result in result["results"] %}
+            <h4 align="left" style="margin-left: 20px;">Suggestion: {{ matrix_result["suggestion"]|upper }}</h4>
+            <table >
+                <tr >
+                    <th></th>
+                    {% for col in matrix_result["matrix"][0] %}
+                    {% set my_suggested_word = "#" ~  matrix_result["suggestion"] ~ ', '%}
+
+                        <th style="text-align: center;">{{ my_suggested_word[loop.index-1]|upper }} </th>
+                    {% endfor %}
+                </tr>
+                {% for row in matrix_result["matrix"] %}
+                    {% set my_Misspelled_word = "#" ~  result["misspelledWord"] ~ ', '%}
+                    <tr>
+                        <th style="text-align: center;">{{ my_Misspelled_word[loop.index-1]|upper }}</th>
+                        {% for value in row %}
+                            <td style="text-align: center;">{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    
+    {% endfor %}
+{% endblock %}

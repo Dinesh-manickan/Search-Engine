@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Reset some default styles */
+        body, h1, h2 {
+            margin: 0;
+            padding: 0;
+           
+        }
+        
+        /* Common styles */
+        body {
+            font-family: Arial, sans-serif;
+            overflow-y: scroll;
+            background: #41b3a3;
+;
+        }
+        header {
+            color: red;
+            padding: 30px;
+            text-align: center;
+            font-size: 40px;
+            font-family: Product Sans;
+        }
+        header c{
+            color: #ccc ;
+
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #333;
+        }
+        .content {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .search-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .search-form input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+        }
+        .search-form input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .active {
+            font-weight: bold;
+        }
+        table {
+            margin: 20px;
+            border-collapse: collapse;
+            width: 97%;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            /* font-family: sans-serif; */
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .styled-table thead tr {
+                    background-color: black;
+                    color: #ffffff;
+                    text-align: left;
+                }
+                .styled-table th,
+                .styled-table td {
+                    padding: 12px 15px;
+                }
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid black;
+        }
+
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{url_for('static',filename='icons8-minecraft-logo-80.png')}}">
+    </header>
+
+    <ul class="nav nav-tabs mb-3 " id="ex1" role="tablist" >
+        <li class="nav-item" role="presentation">
+          <a class="nav-link {% if active_page == 'Home' %}active{% endif %} text-dark" id="ex1-tab-1" data-bs-toggle="tab" href="{{ url_for('index') }}" role="tab" aria-controls="ex1-tabs-1" aria-selected="{% if active_page == 'Home' %}true{% else %}false{% endif %}">Home</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link {% if active_page == 'InvertedIndex' %}active{% endif %} text-dark" id="ex1-tab-2" data-bs-toggle="tab" href="{{ url_for('InvertedIndex') }}" role="tab" aria-controls="ex1-tabs-2" aria-selected="{% if active_page == 'InvertedIndex' %}true{% else %}false{% endif %}">Inverted Index</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link {% if active_page == 'ngram' %}active{% endif %} text-dark" id="ex1-tab-3" data-bs-toggle="tab" href="{{ url_for('BigramIndex') }}" role="tab" aria-controls="ex1-tabs-3" aria-selected="{% if active_page == 'ngram' %}true{% else %}false{% endif %}">Bigram Index</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link {% if active_page == 'PermutermIndex' %}active{% endif %} text-dark" id="ex1-tab-4" data-bs-toggle="tab" href="{{ url_for('PermutermIndex') }}" role="tab" aria-controls="ex1-tabs-4" aria-selected="{% if active_page == 'PermutermIndex' %}true{% else %}false{% endif %}">Permuterm Index</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link {% if active_page == 'SoundexIndex' %}active{% endif %} text-dark" id="ex1-tab-5" data-bs-toggle="tab" href="{{ url_for('SoundexIndex') }}" role="tab" aria-controls="ex1-tabs-5" aria-selected="{% if active_page == 'SoundexIndex' %}true{% else %}false{% endif %}">Soundex</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link {% if active_page == 'EditDistance' %}active{% endif %} text-dark" id="ex1-tab-6" data-bs-toggle="tab" href="{{ url_for('DisplayEditDistance') }}"  role="tab" aria-controls="ex1-tabs-6" aria-selected="{% if active_page == 'EditDistance' %}true{% else %}false{% endif %}">EditDistance</a>
+        </li>
+      </ul>
+
+      </div>
+    <div class="content ">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% block script %}
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
